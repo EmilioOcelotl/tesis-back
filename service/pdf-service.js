@@ -103,8 +103,8 @@ Prácticas Performáticas para el navegador`);
 
 	if(count % 3 == 0 && pgCount < data.imgs.length){
 	    doc.switchToPage(i);
-	    console.log(pgCount);
-	    console.log(data.imgs[pgCount].img); 
+	    //console.log(pgCount);
+	    //console.log(data.imgs[pgCount].img); 
 	    //doc.image(data.imgs[pgCount].img, 0, 0, {width: 792});
 	    var img = doc.openImage(data.imgs[pgCount].img);
 	    doc.addPage({size: [img.width/2, img.height/2]});
