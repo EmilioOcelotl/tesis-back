@@ -51,15 +51,7 @@ module.exports = {
 
 
 	  // Ajustar imágenes verticales 
-	  
-	{
-	    "img": "img/algoritmos.jpg",
-	    "pie": "Portada del libro Algoritmos Arruinados",
-	    "url": "https://www.repositorio.fam.unam.mx/handle/123456789/139",
-	    "nota": "Portada Algoritmos arruinados",
-	    "w": "6.63",
-	    "h": "9.05"
-	    },
+	// buscar una mejor imagen que haga referencia al proceso de algoritmos arriunados, tal vez el diseño de la portada en horizontal 
 		
 	{
 	    "img": "img/three.jpg",
@@ -88,6 +80,16 @@ module.exports = {
 	    "w": "19.2",
 	    "h": "10.8"
 	},
+
+	{
+	    "img": "img/threeunam.jpg",
+	    "pie": "Presentación de THREE.studies en UNAM",
+	    "url": "https://three.ocelotl.cc/",
+	    "nota": "Three.js, exploraciones audiovisuales a distancia",
+	    "w": "19.2",
+	    "h": "10.8"
+	},
+
 	
 	{
 	    "img": "img/felicidades.jpg",
@@ -174,6 +176,17 @@ module.exports = {
 	    "h": "10.8"
 	},
 
+	
+	{
+	    "img": "img/nime1.jpg",
+	    "pie": "Primeros intentos",
+	    "url": "https://three.ocelotl.cc/",
+	    "nota": "Deep Structures. Presentado en NIME por Marianne Teixido y Emilio Ocelotl ",
+	    "w": "19.2",
+	    "h": "10.8"
+	},
+
+	
 		
 	{
 	    "img": "img/algorave.jpg",
@@ -214,6 +227,15 @@ module.exports = {
 
 	{
 	    "img": "img/tres2023.jpg",
+	    "pie": "errores",
+	    "url": "https://three.ocelotl.cc/",
+	    "nota": "Errores en la lectura e impresión de este documento",
+	    "w": "18.95",
+	    "h": "9.6"
+	},
+
+	{
+	    "img": "img/menu.jpg",
 	    "pie": "errores",
 	    "url": "https://three.ocelotl.cc/",
 	    "nota": "Errores en la lectura e impresión de este documento",

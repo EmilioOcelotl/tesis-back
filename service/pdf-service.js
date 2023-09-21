@@ -10,16 +10,12 @@ const initSqlJs = require('sql.js')
 const filebuffer = fs.readFileSync('sql/document.db');
  
 // const fetch = require('node-fetch');
-
 // una de esta podría ser la variable global
-
 let pretxtdb = [], txtdb =[], postdb =[]; 
-
 var turndownService = new TurndownService()
  
 initSqlJs().then(function(SQL){
     // Load the db
-    
     // const intarr = new Uint8Array(buf);
     const db = new SQL.Database(new Uint8Array(filebuffer));
     // console.log(db);
@@ -32,7 +28,7 @@ initSqlJs().then(function(SQL){
 
     for(let i = 0; i < pretxtdb.length; i++){
 	if(ArrayBuffer.isView(pretxtdb[i][0])){
-	    var string = new TextDecoder().decode(pretxtdb[i][0]);
+	    var string = new TextDecoder().decode(pretxtdb[i][0]); // Tendrá qué ver?  
 	    pretxtdb[i] = string;
 	}
     }
@@ -71,18 +67,18 @@ function buildPDF(dataCallback, endCallback) {
     // console.log(dbsort[50]);
     //const mdFilt = markdown.slice(4); 
     
-    const doc = new PDFDocument({ bufferPages: true, font: 'Courier', layout: 'landscape',size: 'Letter', margins: { top: 72+72/2, left: 72, right: 72, bottom: 72 } });
+    const doc = new PDFDocument({ bufferPages: true, font: 'fonts/SourceCodePro-Regular.ttf', layout: 'landscape', size: 'Letter', margins: { top: 72+72/2, left: 72, right: 72, bottom: 72} });
 
     doc.on('data', dataCallback);
     doc.on('end', endCallback);
 
-    doc.fontSize(14).text(`
+    doc.fontSize(12).text(`
 Universidad Nacional Autónoma de México\n
 Programa de Maestría y Doctorado en Música
 Facultad de Música
 Instituto de Ciencias Aplicadas y Tecnología
 Instituto de Investigaciones Antropológicas\n\n\n
-Tres Estudios Abiertos
+TRES ESTUDIOS ABIERTOS
 Expresividad y escritura audiovisual con Javascript\n\n\n
 Que para optar por el grado de
 Doctor en Música
@@ -92,59 +88,69 @@ Emilio Ocelotl Reyes
 Tutor Principal: Hugo Solís
 Comité tutor: Iracema de Andrade y Fernando Monreal`);
 
-    //doc.rect(0, 0, doc.page.width, doc.page.height).fill('#302ed6');
-   
+    //doc.rect(0, 0, doc.page.width, doc.page.height).fill('#302ed6');  
     /*
     doc.image('img/cusco.jpg', 0, 15, {width: 300})
 	.text('Proportional to width', 0, 0);
     */
 
+    doc.addPage(); 
+
     let con = 0;
     let pgCo = 0;
-    
-    for(let i = 12; i < markdown.length; i++){
 
-	
-	const txt = markdown[i].slice(3);
-	const pgBreak = markdown[i].slice(2, 3); 
+    for(let i = 0; i < markdown.length; i++){
 
-	
-	//console.log(id); 
+	if(markdown[i].length > 2){ // filtrar notas en blanco
+	  
+	    const txt = markdown[i].slice(3);
+	    const pgBreak = markdown[i].slice(2, 3); 
+	    
+	    //console.log(id); 
+	    
+	    if( pgBreak == 0){
+		doc.addPage();
+	    }
+	    
+	    doc.fontSize(10).text("\n"+txt)
+	    
+	    if( pgBreak == 0){
+		doc.addPage();
+	    }
+	    
+	    if(con % 3 == 0 && pgCo < data.imgs.length){
+		//doc.addPage(); 
+		var img = doc.openImage(data.imgs[pgCo].img);
+		doc.addPage({size: [img.width/2, img.height/2]});
+		doc.image(img, 0, 0, {width: img.width/2, height: img.height/2});
+		doc.addPage();
+		pgCo++;
+	    }
 
-	
-	if( pgBreak == 0){
-	    doc.addPage();
+	    con++;
 	}
 
-	
-		
-	doc.fontSize(12).text("\n"+txt)
-
-	
-	if(con % 3 == 0 && pgCo < data.imgs.length){
-	    //doc.addPage(); 
-	    var img = doc.openImage(data.imgs[pgCo].img);
-	    doc.addPage({size: [img.width/2, img.height/2]});
-	    doc.image(img, 0, 0, {width: img.width/2, height: img.height/2});
-	    doc.addPage();
-	    pgCo++;
-
-	}
-
-
-
-	con++;
     }
+
+    let conCol = 0;
     
     const range2 = doc.bufferedPageRange(); // => { start: 0, count: 2 }
 
     for (i = range2.start, end = range2.start + range2.count, range2.start <= end; i < end; i++) {
-
-	
 	if(i != 0){ 
 	    doc.switchToPage(i);
-	    doc.fillColor('gray').text(`Página ${i + 1} de ${range2.count}`, 72, 72);
-	}
+	  
+	    // doc.fillColor('black').highlight(70, 70, doc.widthOfString('Página 0 de 1000'), doc.heightOfString('Pagina'), {color: 'gray'}).text(`Página ${i + 1} de ${range2.count}`, 72, 72)
+	    let grad = doc.linearGradient(50, 0, 150, 100);
+	    grad.stop(0, 'black')
+		.stop(1, 'black');
+	    doc.rect(doc.page.width-(doc.widthOfString('Página 100 de 100')+80)-2, 70, doc.widthOfString('Página 100 de 100')+2, doc.heightOfString('Pagina'));
+	    // console.log(doc.page.height); 
+	    doc.fill(grad);
+	    doc.fillColor('white').text(`Página ${i + 1} de ${range2.count}`, doc.page.width-(doc.widthOfString('Página 100 de 100')+80), 72 )
+		
+	    	}
+
     }
     // manually flush pages that have been buffered
     doc.flushPages();
