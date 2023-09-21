@@ -61,8 +61,13 @@ function buildPDF(dataCallback, endCallback) {
 
     // console.log(dbsort.length); 
     var turndownService = new TurndownService()
-    // separar en arreglos para intercalar imágenes 
-    markdown = turndownService.turndown(dbsort.toString());
+    // separar en arreglos para intercalar imágenes
+    let markdown = []; 
+
+    for(let i = 0; i < dbsort.length; i++){
+	markdown[i] = turndownService.turndown(dbsort[i].toString());
+    }
+    
     // console.log(dbsort[50]);
     //const mdFilt = markdown.slice(4); 
     
@@ -72,50 +77,64 @@ function buildPDF(dataCallback, endCallback) {
     doc.on('end', endCallback);
 
     doc.fontSize(14).text(`
-Universidad Nacional Autónoma de México
+Universidad Nacional Autónoma de México\n
 Programa de Maestría y Doctorado en Música
 Facultad de Música
 Instituto de Ciencias Aplicadas y Tecnología
-Instituto de Investigaciones Antropológicas\n\n\n\n\n\n
+Instituto de Investigaciones Antropológicas\n\n\n
 Tres Estudios Abiertos
-Prácticas Performáticas para el navegador`);
+Expresividad y escritura audiovisual con Javascript\n\n\n
+Que para optar por el grado de
+Doctor en Música
+(Tecnología Musical)\n
+Presenta
+Emilio Ocelotl Reyes
+Tutor Principal: Hugo Solís
+Comité tutor: Iracema de Andrade y Fernando Monreal`);
 
     //doc.rect(0, 0, doc.page.width, doc.page.height).fill('#302ed6');
-
-    doc.addPage();
-    
-    doc.addPage(); 
+   
     /*
     doc.image('img/cusco.jpg', 0, 15, {width: 300})
 	.text('Proportional to width', 0, 0);
     */
-    doc.fontSize(12).text(markdown)
 
-    doc.addPage(); 
+    let con = 0;
+    let pgCo = 0;
     
-    const range = doc.bufferedPageRange(); // => { start: 0, count: 2 }
+    for(let i = 12; i < markdown.length; i++){
 
-    let count = 0; 
-    let pgCount = 0; 
+	
+	const txt = markdown[i].slice(3);
+	const pgBreak = markdown[i].slice(2, 3); 
 
-    for (i = range.start, end = range.start + range.count, range.start <= end; i < end; i++) {
+	
+	//console.log(id); 
 
+	
+	if( pgBreak == 0){
+	    doc.addPage();
+	}
 
-	if(count % 3 == 0 && pgCount < data.imgs.length){
-	    doc.switchToPage(i);
-	    //console.log(pgCount);
-	    //console.log(data.imgs[pgCount].img); 
-	    //doc.image(data.imgs[pgCount].img, 0, 0, {width: 792});
-	    var img = doc.openImage(data.imgs[pgCount].img);
+	
+		
+	doc.fontSize(12).text("\n"+txt)
+
+	
+	if(con % 3 == 0 && pgCo < data.imgs.length){
+	    //doc.addPage(); 
+	    var img = doc.openImage(data.imgs[pgCo].img);
 	    doc.addPage({size: [img.width/2, img.height/2]});
 	    doc.image(img, 0, 0, {width: img.width/2, height: img.height/2});
-	    pgCount++;
+	    doc.addPage();
+	    pgCo++;
+
 	}
-	count++;
+
+
+
+	con++;
     }
-
-	//doc.flushPages();
-
     
     const range2 = doc.bufferedPageRange(); // => { start: 0, count: 2 }
 
