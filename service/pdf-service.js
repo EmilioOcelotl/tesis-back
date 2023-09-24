@@ -67,7 +67,7 @@ function buildPDF(dataCallback, endCallback) {
     // console.log(dbsort[50]);
     //const mdFilt = markdown.slice(4); 
     
-    const doc = new PDFDocument({ bufferPages: true, font: 'fonts/SourceCodePro-Regular.ttf', layout: 'landscape', size: 'Letter', margins: { top: 72+72/2, left: 72, right: 72, bottom: 72} });
+    const doc = new PDFDocument({ bufferPages: true, font: 'fonts/SourceCodePro-Regular.ttf', size: 'Letter', margins: { top: 72+72/2, left: 72, right: 72, bottom: 72} });
 
     doc.on('data', dataCallback);
     doc.on('end', endCallback);
@@ -77,9 +77,9 @@ Universidad Nacional Autónoma de México\n
 Programa de Maestría y Doctorado en Música
 Facultad de Música
 Instituto de Ciencias Aplicadas y Tecnología
-Instituto de Investigaciones Antropológicas\n\n\n
+Instituto de Investigaciones Antropológicas\n\n\n\n\n\n
 TRES ESTUDIOS ABIERTOS
-Expresividad y escritura audiovisual con Javascript\n\n\n
+Expresividad y escritura audiovisual con Javascript\n\n\n\n\n\n
 Que para optar por el grado de
 Doctor en Música
 (Tecnología Musical)\n
@@ -94,6 +94,7 @@ Comité tutor: Iracema de Andrade y Fernando Monreal`);
 	.text('Proportional to width', 0, 0);
     */
 
+    doc.addPage();
     doc.addPage(); 
 
     let con = 0;
@@ -112,7 +113,7 @@ Comité tutor: Iracema de Andrade y Fernando Monreal`);
 		doc.addPage();
 	    }
 	    
-	    doc.fontSize(10).text("\n"+txt)
+	    doc.fillColor('black').fontSize(10).text("\n"+txt)
 	    
 	    if( pgBreak == 0){
 		doc.addPage();
@@ -122,7 +123,13 @@ Comité tutor: Iracema de Andrade y Fernando Monreal`);
 		//doc.addPage(); 
 		var img = doc.openImage(data.imgs[pgCo].img);
 		doc.addPage({size: [img.width/2, img.height/2]});
-		doc.image(img, 0, 0, {width: img.width/2, height: img.height/2});
+		doc.image(img, 0, 0, {width: img.width/2, height: img.height/2}).link(0, 0, img.width, img.height, data.imgs[pgCo].url);;
+		let grad = doc.linearGradient(50, 0, 150, 100);
+		grad.stop(0, 'black')
+		    .stop(1, 'black');
+		doc.rect(68, doc.page.height-(doc.page.height/5)-4, doc.page.width, doc.heightOfString(data.imgs[pgCo].nota)+8);
+		doc.fill(grad); 
+		doc.fillColor('white').text("Figura "+(pgCo+1)+". "+data.imgs[pgCo].nota, 72, doc.page.height-(doc.page.height/5)-4)
 		doc.addPage();
 		pgCo++;
 	    }
@@ -149,7 +156,7 @@ Comité tutor: Iracema de Andrade y Fernando Monreal`);
 	    doc.fill(grad);
 	    doc.fillColor('white').text(`Página ${i + 1} de ${range2.count}`, doc.page.width-(doc.widthOfString('Página 100 de 100')+80), 72 )
 		
-	    	}
+	}
 
     }
     // manually flush pages that have been buffered

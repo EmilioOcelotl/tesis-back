@@ -10,247 +10,145 @@ module.exports = {
     "imgs":[
 	{
 	    "img": "img/col2.jpg",
-	    "pie": "Coloquio",
-	    "url": "https://hydra.ojack.xyz/?sketch_id=ritchse_3",
-	    "nota": "Presentación en el coloquio de estudiantes",
-	    "w": "19.2",
-	    "h": "10.8"
+	    "url": "https://www.youtube.com/watch?v=HwBTRQKr9Ps",
+	    "nota": "Concierto de clausura del XVI Coloquio de alumnas del posgrado en música UNAM. Libertad Figueroa, Dorian Sotomayor, Marianne Teixido, Diego Villaseñor, Aaron Escobar, Hernani Villaseñor y Emilio Ocelotl. 2021"
 	},
 	{
 	    "img": "img/of13.jpg",
-	    "pie": "OF",
-	    "url": "https://hydra.ojack.xyz/?sketch_id=ritchse_3",
-	    "nota": "Retroalimentación, texto impreso y mesh. Estudio en OF",
-	    "w": "19.2",
-	    "h": "10.8"
+	    "url": "",
+	    "nota": "Estudio en OpenFrameworks sobre retroalimentación y texto proveniente de ejecuciones en SuperCollider"
 	},
 	{
 	    "img": "img/hydrarit.jpg",
-	    "pie": "Hydra de Olivia Jack con un sketch de Ritsche",
 	    "url": "https://hydra.ojack.xyz/?sketch_id=ritchse_3",
-	    "nota": "Ejemplo de Hydra",
-	    "w": "19.2",
-	    "h": "10.8"
+	    "nota": "Hydra es un sintetizador de audio que puede ejecutarse en el navegador. Stil de un sketch realizado por Ritchse."
 	},
 	{ 
 	    "img": "img/notas.jpg",
-	    "pie": "Notas de Ausencia - Marianne Teixido",
 	    "url": "https://notasdeausencia.cc/",
-	    "nota": "Referencia a Notas de Ausencia como un antecedente",
-	    "w": "19.02",
-	    "h": "9.96"
+	    "nota": "Stil de Notas de ausencia de Marianne Teixido. Este proyecto referente para esta investigación."
 	},
 	{
 	    "img": "img/plabccd.jpg",
-	    "pie": "Ciclo de Talleres PiranhaLab - CCD",
 	    "url": "https://piranhalab.github.io/proyectos.html#CCD-PADID",
-	    "nota": "Ciclo de talleres",
-	    "w": "9.6",
-	    "h": "6.39"
+	    "nota": "Ciclo de talleres sobre interfaces de código realizado en el Centro de Cultura Digital en colaboración con el laboratorio de Tecnologías Libres. De izquierda a derecha: José Carlos Hasbún, Hernani Villaseñor, Diego Villaseñor, Celeste Betancour, Marianne Teixido y Rodrigo Frenk. Ciudad de México 2019."
 	},
-
-
-	  // Ajustar imágenes verticales 
-	// buscar una mejor imagen que haga referencia al proceso de algoritmos arriunados, tal vez el diseño de la portada en horizontal 
-		
+	{
+	    "img": "img/esfera.jpg",
+	    "url": "https://www.repositorio.fam.unam.mx/handle/123456789/139",
+	    "nota": "Sketch tentativo para la portada del libro Algoritmos Arruinados realizado por Marianne Teixido y por mí en Hydra y Three.js."
+	},
 	{
 	    "img": "img/three.jpg",
-	    "pie": "Primeros intentos",
-	    "url": "", // revisar si es posible activar este sitio 
-	    "nota": "Three.js, primeras exploraciones audiovisuales",
-	    "w": "19.2",
-	    "h": "10.8"
-	},
-
-		
+	    "url": "",  
+	    "nota": "Pruebas iniciales para establecer relaciones audiovisuales en el navegador realizadas en Three.js"
+	},	
 	{
 	    "img": "img/iracema.jpg",
-	    "pie": "Primeros intentos",
-	    "url": "", // revisar si es posible activar este sitio 
-	    "nota": "Three.js, exploraciones audiovisuales a distancia",
-	    "w": "19.2",
-	    "h": "10.8"
+	    "url": "",  
+	    "nota": "Primeras pruebas de colaboración a distanciacon Iracema de Andrade. Al fondo: una transmisión bidireccional de audio y al frente, un editor de texto (emacs) con la ejecución de SuperCollider."
 	},
-
 	{
 	    "img": "img/iracema2.jpg",
-	    "pie": "Primeros intentos",
 	    "url": "https://three.ocelotl.cc/",
-	    "nota": "Three.js, exploraciones audiovisuales a distancia",
-	    "w": "19.2",
-	    "h": "10.8"
+	    "nota": "Sitio web con la visualización y la grabación de las primeras pruebas de colaboración a distancia con Iracema de Andrade."
 	},
-
 	{
 	    "img": "img/threeunam.jpg",
-	    "pie": "Presentación de THREE.studies en UNAM",
 	    "url": "https://three.ocelotl.cc/",
-	    "nota": "Three.js, exploraciones audiovisuales a distancia",
-	    "w": "19.2",
-	    "h": "10.8"
-	},
-
-	
+	    "nota": "Three.js, exploraciones audiovisuales a distancia"
+	},	
 	{
 	    "img": "img/felicidades.jpg",
-	    "pie": "Anti",
 	    "url": "",
-	    "nota": "Three.js y SuperCollider. Cusco",
-	    "w": "12.85",
-	    "h": "8.08"
+	    "nota": "Three.js y SuperCollider. Cusco"
 	},
-
 	{
 	    "img": "img/anti2.jpg",
-	    "pie": "Anti2",
 	    "url": "",
-	    "nota": "Three.js y SuperCollider. Cusco",
-	    "w": "19.2",
-	    "h": "10.8"
+	    "nota": "Three.js y SuperCollider. Cusco"
 	},
-
-	
 	{
 	    "img": "img/anti1.jpg",
-	    "pie": "Anti2",
 	    "url": "",
-	    "nota": "Three.js y SuperCollider. Cusco",
-	    "w": "19.2",
-	    "h": "10.8"
+	    "nota": "Three.js y SuperCollider. Cusco"
 	},
-
 	{
 	    "img": "img/circulos.jpg",
-	    "pie": "Primeros intentos",
-	    "url": "",
-	    "nota": "Estudio audiovisual. Hydra, Three.js y Web Audio API",
-	    "w": "15.3",
-	    "h": "10.71"
+	    "url": "", 
+	    "nota": "Three.js, primeras exploraciones audiovisuales"
 	},
-	
-	
 	{
 	    "img": "img/cusco.jpg",
-	    "pie": "Cusco",
 	    "url": "",
-	    "nota": "Three.js y SuperCollider. Cusco",
-	    "w": "51.84",
-	    "h": "34.56"
+	    "nota": "Three.js y SuperCollider. Cusco"
 	},
 
 	{
 	    "img": "img/error2.jpg",
-	    "pie": "Primeros intentos",
 	    "url": "",
-	    "nota": "Estudio audiovisual. Hydra, Three.js y Web Audio API",
-	    "w": "14.7",
-	    "h": "10.8"
+	    "nota": "Estudio audiovisual. Hydra, Three.js y Web Audio API"
 	},
-	
-	
 	{
 	    "img": "img/thhydra.jpg",
-	    "pie": "Primeros intentos",
 	    "url": "",
-	    "nota": "Estudio audiovisual. Hydra, Three.js y Web Audio API",
-	    "w": "10.8",
-	    "h": "10.8"
+	    "nota": "Estudio audiovisual. Hydra, Three.js y Web Audio API"
 	},
-	
+	{
+	    "img": "img/hydra.jpg",
+	    "url": "", 
+	    "nota": "Three.js, primeras exploraciones audiovisuales"
+	},
 	{
 	    "img": "img/fonts.jpg",
-	    "pie": "Exploración tipográfica",
 	    "url": "",
-	    "nota": "Exploración tipográfica",
-	    "w": "20.48",
-	    "h": "20.48"
+	    "nota": "Exploración tipográfica"
 	},
-
-	
 	{
 	    "img": "img/nime.jpg",
-	    "pie": "Primeros intentos",
 	    "url": "https://three.ocelotl.cc/",
-	    "nota": "Deep Structures. Presentado en NIME por Marianne Teixido y Emilio Ocelotl ",
-	    "w": "19.2",
-	    "h": "10.8"
+	    "nota": "Deep Structures. Presentado en NIME por Marianne Teixido y Emilio Ocelotl "
 	},
-
-	
 	{
 	    "img": "img/nime1.jpg",
-	    "pie": "Primeros intentos",
 	    "url": "https://three.ocelotl.cc/",
 	    "nota": "Deep Structures. Presentado en NIME por Marianne Teixido y Emilio Ocelotl ",
-	    "w": "19.2",
-	    "h": "10.8"
 	},
-
-	
-		
 	{
 	    "img": "img/algorave.jpg",
-	    "pie": "Primeros intentos",
 	    "url": "https://three.ocelotl.cc/",
 	    "nota": "Deep Structures. Presentado en NIME por Marianne Teixido y Emilio Ocelotl ",
-	    "w": "19.2",
-	    "h": "10.8"
 	},
-
-
 	{
 	    "img": "img/tesisGlitch.jpg",
-	    "pie": "errores",
 	    "url": "https://three.ocelotl.cc/",
-	    "nota": "Errores en la lectura e impresión de este documento",
-	    "w": "10.8",
-	    "h": "19.2"
+	    "nota": "Errores en la lectura e impresión de este documento"
 	},
-
 	{
 	    "img": "img/map.jpg",
-	    "pie": "errores",
 	    "url": "https://three.ocelotl.cc/",
-	    "nota": "Errores en la lectura e impresión de este documento",
-	    "w": "6.55",
-	    "h": "7.44"
+	    "nota": "Errores en la lectura e impresión de este documento"
 	},
-	
 	{
 	    "img": "img/tesisGlitch2.jpg",
-	    "pie": "errores",
 	    "url": "https://three.ocelotl.cc/",
-	    "nota": "Errores en la lectura e impresión de este documento",
-	    "w": "10.8",
-	    "h": "19.2"
+	    "nota": "Errores en la lectura e impresión de este documento"
 	},
-
 	{
 	    "img": "img/tres2023.jpg",
-	    "pie": "errores",
 	    "url": "https://three.ocelotl.cc/",
-	    "nota": "Errores en la lectura e impresión de este documento",
-	    "w": "18.95",
-	    "h": "9.6"
+	    "nota": "Errores en la lectura e impresión de este documento"
 	},
-
 	{
 	    "img": "img/menu.jpg",
-	    "pie": "errores",
 	    "url": "https://three.ocelotl.cc/",
-	    "nota": "Errores en la lectura e impresión de este documento",
-	    "w": "18.95",
-	    "h": "9.6"
+	    "nota": "Errores en la lectura e impresión de este documento"
 	}
-
 	/*
 	{
 	    "img": "",
-	    "pie": "",
 	    "url": "",
-	    "nota": "Para la distribución, buscar una mejor forma",
-	    "w": "10.8",
-	    "h": "19.2"
+	    "nota": ""
 	    }
 	*/
     ] 
