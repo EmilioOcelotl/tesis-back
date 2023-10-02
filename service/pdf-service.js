@@ -4,6 +4,8 @@ var axios = require('axios').default;
 const TurndownService = require('turndown');
 const data = require('./../data/imgs.js');
 
+// En este apartado de la investigación defino una parte de la infraestructura 
+
 // console.log(data); 
 const fs = require('fs');
 const initSqlJs = require('sql.js')
@@ -77,9 +79,9 @@ Universidad Nacional Autónoma de México\n
 Programa de Maestría y Doctorado en Música
 Facultad de Música
 Instituto de Ciencias Aplicadas y Tecnología
-Instituto de Investigaciones Antropológicas\n\n\n\n\n\n
+Instituto de Investigaciones Antropológicas\n\n\n\n\n\n\n\n
 TRES ESTUDIOS ABIERTOS
-Expresividad y escritura audiovisual con Javascript\n\n\n\n\n\n
+Escrituras performáticas audiovisuales e investigación con Javascript\n\n\n\n\n\n\n\n
 Que para optar por el grado de
 Doctor en Música
 (Tecnología Musical)\n
@@ -105,21 +107,37 @@ Comité tutor: Iracema de Andrade y Fernando Monreal`);
 	if(markdown[i].length > 2){ // filtrar notas en blanco
 	  
 	    const txt = markdown[i].slice(3);
-	    const pgBreak = markdown[i].slice(2, 3); 
-	    
-	    //console.log(id); 
-	    
-	    if( pgBreak == 0){
-		doc.addPage();
+	    const pgBreak = markdown[i].slice(2, 3);
+	    const notes = markdown[i].slice(0, 1);
+
+	    // Salto para el título inicial de cada capítulo
+
+	    if( pgBreak == 0 && notes!=9 && notes != 6){
+		doc.addPage({size: [612, 792]});
+	    }
+
+	    // Agregar el bloque de texto 
+
+	    if(notes == 'a' && notes!=9  && notes != 6){
+		doc.fillColor('black').fontSize(10).text("\n"+txt, {width: 612-(72*2)})
+	    } else if(notes!=9 && notes != 6){		
+		doc.fillColor('black').fontSize(10).text("\n\n"+txt+"\n", {width: 612-(72*2)})
 	    }
 	    
-	    doc.fillColor('black').fontSize(10).text("\n"+txt)
-	    
-	    if( pgBreak == 0){
+	    if( pgBreak == 0 && notes!=9 && notes != 6){
+		doc.addPage({size: [612, 792]});
+	    }
+
+	   
+	    // Salto para las notas finales de cada capítulo
+
+	    /*
+	    if( pgBreak == 8){
 		doc.addPage();
 	    }
+	    */
 	    
-	    if(con % 3 == 0 && pgCo < data.imgs.length){
+	    if(con % 2 == 0 && pgCo < data.imgs.length){
 		//doc.addPage(); 
 		var img = doc.openImage(data.imgs[pgCo].img);
 		doc.addPage({size: [img.width/2, img.height/2]});
@@ -130,7 +148,7 @@ Comité tutor: Iracema de Andrade y Fernando Monreal`);
 		doc.rect(68, doc.page.height-(doc.page.height/5)-4, doc.page.width, doc.heightOfString(data.imgs[pgCo].nota)+8);
 		doc.fill(grad); 
 		doc.fillColor('white').text("Figura "+(pgCo+1)+". "+data.imgs[pgCo].nota, 72, doc.page.height-(doc.page.height/5)-4)
-		doc.addPage();
+		// doc.addPage();
 		pgCo++;
 	    }
 

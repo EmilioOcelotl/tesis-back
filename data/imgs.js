@@ -16,7 +16,12 @@ module.exports = {
 	{
 	    "img": "img/of13.jpg",
 	    "url": "",
-	    "nota": "Estudio en OpenFrameworks sobre retroalimentación y texto proveniente de ejecuciones en SuperCollider"
+	    "nota": "Estudio realizado en OpenFrameworks sobre retroalimentación y texto proveniente de ejecuciones en SuperCollider"
+	},
+	{
+	    "img": "img/processing-000559.jpg",
+	    "url": "",
+	    "nota": "Estudio realizado en Processing. Modificación de una imagen con copias y desplazamientos."
 	},
 	{
 	    "img": "img/hydrarit.jpg",
