@@ -1,0 +1,7 @@
+// Este módulo de código se encarga de leer, filtrar e imprimir el texto
+
+function DbReader(){
+    
+}
+
+export{ DbReader }
