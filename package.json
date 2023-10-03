@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "dev": "nodemon index.js",
-    "limpiar": "rm -r node_modules && rm sql/document.db && cp /home/emi/.local/share/trilium-data/document.db sql/",
+    "limpiar": "rm -r node_modules && rm sql/document.db && cp /root/trilium-data/document.db sql/",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",

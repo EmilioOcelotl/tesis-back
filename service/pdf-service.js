@@ -111,23 +111,24 @@ Comité tutor: Iracema de Andrade y Fernando Monreal`);
 	    const txt = markdown[i].slice(3);
 	    const pgBreak = markdown[i].slice(2, 3);
 	    const notes = markdown[i].slice(0, 1);
-	    const code = markdown[i].slice(0, 6); 
+	    const code = markdown[i].slice(5, 9); 
 
+	    //console.log(code); 
 	    // Salto para el título inicial de cada capítulo
 
-	    if( pgBreak == 0 && notes!=9 && notes != 6 && notes != "//code"){
+	    if( pgBreak == 0 && notes!=9 && notes != 6 && code != "code"){
 		doc.addPage({size: [612, 792]});
 	    }
 
 	    // Agregar el bloque de texto 
 
-	    if(notes == 'a' && notes!=9  && notes != 6  && notes != "//code"){
+	    if(notes == 'a' && notes!=9  && notes != 6  && code != "code"){
 		doc.fillColor('black').fontSize(10).text("\n"+txt, {width: 612-(72*2)})
-	    } else if(notes!=9 && notes != 6  && notes != "//code"){	
+	    } else if(notes!=9 && notes != 6  && code != "code"){	
 		doc.fillColor('black').fontSize(10).text("\n\n"+txt+"\n", {width: 612-(72*2)})
 	    }
 	    
-	    if( pgBreak == 0 && notes!=9 && notes != 6 && notes != "//code"){
+	    if( pgBreak == 0 && notes!=9 && notes != 6 && code != "code"){
 		doc.addPage({size: [612, 792]});
 	    }
 
