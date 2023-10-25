@@ -7,6 +7,7 @@ const TurndownService = require('turndown');
 const data = require('./../data/imgs.js');
 
 // En este apartado de la investigación defino una parte de la infraestructura 
+// Necesito separar esto para que pueda funcionar en el front. 
 
 // console.log(data); 
 const fs = require('fs');
@@ -60,6 +61,9 @@ initSqlJs().then(function(SQL){
 
 // Esta función es llamada más adelante. En este módulo de código se construye el PDF con la biblioteca PDFkit  
 function buildPDF(dataCallback, endCallback) {
+
+    let index = []; // guardar las páginas del índice. 
+    
     // Primero hay que ordenar las notas alfabéticamente. Esto permite que se ordenen jerárquicamente a partir de una notación tipo índice
     const dbsort = postdb.sort();
 
@@ -79,7 +83,7 @@ function buildPDF(dataCallback, endCallback) {
     // bufferPages permite regresar a las páginas del documento para agregar elementos. Por ejemplo el número de página.
     // Con font es posible personalizar la fuente. En este caso, la fuente general del documento es SourceCodePro
     // También se determinan el tamaño de la página y los márgenes
-    const doc = new PDFDocument({ bufferPages: true, font: 'fonts/SourceCodePro-Regular.ttf', size: 'Letter', margins: { top: 72+72/2, left: 72, right: 72, bottom: 72} });
+    const doc = new PDFDocument({ bufferPages: true, font: 'fonts/SourceCodePro-Regular.ttf', size: [792, 612], margins: { top: 72+72/2, left: 72, right: 72, bottom: 72} });
 
     // la funcion buildPDF tiene dos estados, dataCallback que es el llamado de los datos solicitados, en este caso un archivo pdf
     doc.on('data', dataCallback);
@@ -87,26 +91,26 @@ function buildPDF(dataCallback, endCallback) {
     doc.on('end', endCallback);
 
     // Primera página. En este caso, la portada del documento es un string. 
-    doc.fontSize(12).text(`
-Universidad Nacional Autónoma de México\n
+    doc.fontSize(10).text(`
+UNIVERSIDAD NACIONAL AUTÓNOMA DE MÉXICO\n
 Programa de Maestría y Doctorado en Música
 Facultad de Música
 Instituto de Ciencias Aplicadas y Tecnología
-Instituto de Investigaciones Antropológicas\n\n\n\n\n\n\n\n
+Instituto de Investigaciones Antropológicas\n\n\n\n\n
 TRES ESTUDIOS ABIERTOS
-Escrituras performáticas audiovisuales e investigación con Javascript\n\n\n\n\n\n\n\n
+Escrituras performáticas audiovisuales e investigación con Javascript\n\n\n\n\n
 Que para optar por el grado de
 Doctor en Música
 (Tecnología Musical)\n
 Presenta
-Emilio Ocelotl Reyes
+Emilio Ocelotl
 Tutor Principal: Hugo Solís
 Comité tutor: Iracema de Andrade y Fernando Monreal`);
 
     // Dos páginas en blanco
 
-    doc.addPage();
-    doc.addPage(); 
+    doc.addPage({size: [792, 612]});
+    doc.addPage({size: [792, 612]}); 
 
     // contador general
     let con = 0;
@@ -123,24 +127,29 @@ Comité tutor: Iracema de Andrade y Fernando Monreal`);
 	    const notes = markdown[i].slice(0, 1); // Identificador para filtrar un conjunto de notas que eliminé pero siguen apareciendo en la base. Posiblemente sea necesario eliminarlas desde una declaración. 
 	    const code = markdown[i].slice(5, 9); // También es necesario filtrar algunas notas de código que aparecen mal codificadas. 
 
+	    const regexMdLinks = /\[(.*?)\]\(.*?\)/g
+	    const matches = txt.replace(/(?:__|[*#])|\[(.*?)\]\(.*?\)/gm, '$1')
+	    //console.log(matches)
+	    
 	    // Salto para el título inicial de cada capítulo. Aquí se implementan los filtros antes declarados. 
-
+	    // También debería haber saltos para las notas
+	    
 	    if( pgBreak == 0 && notes!=9 && notes != 6 && code != "code"){
 		// es necesario regresar al tamaño de hoja carta cuando se modifica el tamañoo por la inserción de una imagen
-		doc.addPage({size: [612, 792]});
+		doc.addPage({size: [792, 612]});
 	    }
-	    
+
 	    if(notes == 'a' && notes!=9  && notes != 6  && code != "code"){		
 		// Agregar el bloque de texto. Si es una referencia entonces los espacios entre notas se reducen 
-		doc.fillColor('black').fontSize(10).text("\n"+txt, {width: 612-(72*2)})
+		doc.fillColor('black').fontSize(10).text("\n"+matches, {width: 792-(72*2)})
 	    } else if(notes!=9 && notes != 6  && code != "code"){
 		// Agrega una nota de texto normal 
-		doc.fillColor('black').fontSize(10).text("\n\n"+txt+"\n", {width: 612-(72*2)})
+		doc.fillColor('black').fontSize(10).text("\n\n"+matches+"\n", {width: 792-(72*2)})
 	    }
 
 	    // Para los inicios de capítulo es necesario agregar otro salto de línea. El identificador de cada capítulo es un 0 
 	    if( pgBreak == 0 && notes!=9 && notes != 6 && code != "code"){
-		doc.addPage({size: [612, 792]});
+		doc.addPage({size: [792, 612]});
 	    }
 
 	    // Hay un contador que aumenta en uno cada vez que se inserta una nueva nota. Este contador es modulado a dos es decir, cada dos notas, va a insertar una nueva nota. Para que no haya problemas con respecto a la cantidad total de imágenes, es necesario poner un límite para que no intente introducir una imagen que está fuera de la cantidad total de imágenes
@@ -186,10 +195,8 @@ Comité tutor: Iracema de Andrade y Fernando Monreal`);
 	    doc.rect(doc.page.width-(doc.widthOfString('Página 100 de 100')+80)-2, 70, doc.widthOfString('Página 100 de 100')+2, doc.heightOfString('Pagina'));
 	    // console.log(doc.page.height); 
 	    doc.fill(grad);
-	    doc.fillColor('white').text(`Página ${i + 1} de ${range2.count}`, doc.page.width-(doc.widthOfString('Página 100 de 100')+80), 72 )
-		
+	    doc.fillColor('white').text(`Página ${i + 1} de ${range2.count}`, doc.page.width-(doc.widthOfString('Página 100 de 100')+80), 72 )		
 	}
-
     }
     // Por último se vacían las páginas almacenadas en el buffer
     doc.flushPages();
