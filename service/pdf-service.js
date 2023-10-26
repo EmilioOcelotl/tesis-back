@@ -55,7 +55,7 @@ initSqlJs().then(function(SQL){
 	}
     }
     // agregamos en un nuevo arreglo todas las notas menos las últimas 5
-   postdb = txtdb.slice(0, txtdb.length-5); // las últimas notas parece que son imágenes
+    postdb = txtdb.slice(0, txtdb.length-5); // las últimas notas parece que son imágenes. Parece que por esto no se imprimen las últimas notas en el servidor
 
 });
 
@@ -65,7 +65,7 @@ function buildPDF(dataCallback, endCallback) {
     let index = []; // guardar las páginas del índice. 
     
     // Primero hay que ordenar las notas alfabéticamente. Esto permite que se ordenen jerárquicamente a partir de una notación tipo índice
-    const dbsort = postdb.sort();
+    //const dbsort = postdb.sort();
 
     // Los strings extraídos de las notas tienen notación HTML. Entonces es necesario convertir a markdown. Algunas anotaciones se mantienen
     var turndownService = new TurndownService()
@@ -75,9 +75,11 @@ function buildPDF(dataCallback, endCallback) {
     // Si cada una de las notas es un archivo markdown entonces es más fácil de trabajar.
     // Por otro lado, también se podría compilar en el servidor un documento latex. Pertinente revisar si esto es necesario
     
-    for(let i = 0; i < dbsort.length; i++){
-	markdown[i] = turndownService.turndown(dbsort[i].toString());
+    for(let i = 0; i < postdb.length; i++){
+	markdown[i] = turndownService.turndown(postdb[i].toString());
     }
+
+    marksort = markdown.sort(); 
 
     // Condiciones iniciales del documento PDF.
     // bufferPages permite regresar a las páginas del documento para agregar elementos. Por ejemplo el número de página.
@@ -118,27 +120,28 @@ Comité tutor: Iracema de Andrade y Fernando Monreal`);
     let pgCo = 0;
 
     // El siguiente loop lee todas las notas ya convertidas a markdown 
-    for(let i = 0; i < markdown.length; i++){
+    for(let i = 0; i < marksort.length; i++){
 
 	// Solamente se imprimen notas con más de dos caracteres
 	if(markdown[i].length > 2){ 
-	    const txt = markdown[i].slice(3); // identificador jerárquico. Con una numeración es posible construir el documento de manera lineal
-	    const pgBreak = markdown[i].slice(2, 3); // Lectura del segundo número para dar saltos de línea. 
-	    const notes = markdown[i].slice(0, 1); // Identificador para filtrar un conjunto de notas que eliminé pero siguen apareciendo en la base. Posiblemente sea necesario eliminarlas desde una declaración. 
-	    const code = markdown[i].slice(5, 9); // También es necesario filtrar algunas notas de código que aparecen mal codificadas. 
+	    // const txt = marksort[i].slice(3); // identificador jerárquico. Con una numeración es posible construir el documento de manera lineal
+	    const pgBreak = marksort[i].slice(2, 3); // Lectura del segundo número para dar saltos de línea. 
+	    const notes = marksort[i].slice(0, 1); // Identificador para filtrar un conjunto de notas que eliminé pero siguen apareciendo en la base. Posiblemente sea necesario eliminarlas desde una declaración. 
+	    const code = marksort[i].slice(5, 9); // También es necesario filtrar algunas notas de código que aparecen mal codificadas. 
 
+	    // Cambiar enlaces de markdown a solamente el contenido de la nota 
 	    const regexMdLinks = /\[(.*?)\]\(.*?\)/g
-	    const matches = txt.replace(/(?:__|[*#])|\[(.*?)\]\(.*?\)/gm, '$1')
+	    const matches = marksort[i].replace(/\[([^\]]+)\]\(([^)]+)\)/g, '$1')
 	    //console.log(matches)
 	    
 	    // Salto para el título inicial de cada capítulo. Aquí se implementan los filtros antes declarados. 
 	    // También debería haber saltos para las notas
-	    
-	    if( pgBreak == 0 && notes!=9 && notes != 6 && code != "code"){
+	   
+	    if( pgBreak == 0 || pgBreak == 8 && notes!=9 && notes != 6 && code != "code"){
 		// es necesario regresar al tamaño de hoja carta cuando se modifica el tamañoo por la inserción de una imagen
 		doc.addPage({size: [792, 612]});
 	    }
-
+	    
 	    if(notes == 'a' && notes!=9  && notes != 6  && code != "code"){		
 		// Agregar el bloque de texto. Si es una referencia entonces los espacios entre notas se reducen 
 		doc.fillColor('black').fontSize(10).text("\n"+matches, {width: 792-(72*2)})
@@ -146,15 +149,16 @@ Comité tutor: Iracema de Andrade y Fernando Monreal`);
 		// Agrega una nota de texto normal 
 		doc.fillColor('black').fontSize(10).text("\n\n"+matches+"\n", {width: 792-(72*2)})
 	    }
-
-	    // Para los inicios de capítulo es necesario agregar otro salto de línea. El identificador de cada capítulo es un 0 
+	    
+	    // Para los inicios de capítulo es necesario agregar otro salto de línea. El identificador de cada capítulo es un 0
+	    
 	    if( pgBreak == 0 && notes!=9 && notes != 6 && code != "code"){
 		doc.addPage({size: [792, 612]});
 	    }
-
+	    
 	    // Hay un contador que aumenta en uno cada vez que se inserta una nueva nota. Este contador es modulado a dos es decir, cada dos notas, va a insertar una nueva nota. Para que no haya problemas con respecto a la cantidad total de imágenes, es necesario poner un límite para que no intente introducir una imagen que está fuera de la cantidad total de imágenes
 	    
-	    if(con % 2 == 0 && pgCo < data.imgs.length){
+	    if(con % 3 == 0 && pgCo < data.imgs.length){
 		// El primer paso consiste en leer la imagen
 		var img = doc.openImage(data.imgs[pgCo].img);
 		// Luego, agrego una página con la mitad del tamaño de la imagen
