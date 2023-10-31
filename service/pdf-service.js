@@ -119,20 +119,25 @@ Comité tutor: Iracema de Andrade y Fernando Monreal`);
     // contador de páginas 
     let pgCo = 0;
 
+    let matches; 
     // El siguiente loop lee todas las notas ya convertidas a markdown 
     for(let i = 0; i < marksort.length; i++){
 
 	// Solamente se imprimen notas con más de dos caracteres
 	if(markdown[i].length > 2){ 
-	    // const txt = marksort[i].slice(3); // identificador jerárquico. Con una numeración es posible construir el documento de manera lineal
+	    const txt = marksort[i].slice(3); // identificador jerárquico. Con una numeración es posible construir el documento de manera lineal
 	    const pgBreak = marksort[i].slice(2, 3); // Lectura del segundo número para dar saltos de línea. 
 	    const notes = marksort[i].slice(0, 1); // Identificador para filtrar un conjunto de notas que eliminé pero siguen apareciendo en la base. Posiblemente sea necesario eliminarlas desde una declaración. 
 	    const code = marksort[i].slice(5, 9); // También es necesario filtrar algunas notas de código que aparecen mal codificadas. 
 
 	    // Cambiar enlaces de markdown a solamente el contenido de la nota 
 	    const regexMdLinks = /\[(.*?)\]\(.*?\)/g
-	    const matches = marksort[i].replace(/\[([^\]]+)\]\(([^)]+)\)/g, '$1')
+	    matches = marksort[i].replace(/\[([^\]]+)\]\(([^)]+)\)/g, '$1')
 	    //console.log(matches)
+
+	    if(pgBreak == "8" || pgBreak == "9"){
+		matches = matches.slice(4); 
+	    }
 	    
 	    // Salto para el título inicial de cada capítulo. Aquí se implementan los filtros antes declarados. 
 	    // También debería haber saltos para las notas
