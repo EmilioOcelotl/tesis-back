@@ -135,7 +135,7 @@ Comité tutor: Iracema de Andrade y Fernando Monreal`);
 	    matches = marksort[i].replace(/\[([^\]]+)\]\(([^)]+)\)/g, '$1')
 	    //console.log(matches)
 
-	    if(pgBreak == "8" || pgBreak == "9"){
+	    if(pgBreak == "8" || pgBreak == "9" || notes == "a"){
 		matches = matches.slice(4); 
 	    }
 	    
