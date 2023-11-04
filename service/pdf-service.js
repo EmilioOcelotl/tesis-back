@@ -142,22 +142,22 @@ Comité tutor: Iracema de Andrade y Fernando Monreal`);
 	    // Salto para el título inicial de cada capítulo. Aquí se implementan los filtros antes declarados. 
 	    // También debería haber saltos para las notas
 	   
-	    if( pgBreak == 0 || pgBreak == 8 && notes!=9 && notes != 6 && code != "code"){
+	    if( pgBreak == 0  && notes!=9 && notes != 6 ){
 		// es necesario regresar al tamaño de hoja carta cuando se modifica el tamañoo por la inserción de una imagen
 		doc.addPage({size: [792, 612]});
 	    }
 	    
-	    if(notes == 'a' && notes!=9  && notes != 6  && code != "code"){		
+	    if(notes == 'a' && notes!=9  && notes != 6 ){		
 		// Agregar el bloque de texto. Si es una referencia entonces los espacios entre notas se reducen 
 		doc.fillColor('black').fontSize(10).text("\n"+matches, {width: 792-(72*2)})
-	    } else if(notes!=9 && notes != 6  && code != "code"){
+	    } else if(notes!=9 && notes != 6 ){
 		// Agrega una nota de texto normal 
 		doc.fillColor('black').fontSize(10).text("\n\n"+matches+"\n", {width: 792-(72*2)})
 	    }
 	    
 	    // Para los inicios de capítulo es necesario agregar otro salto de línea. El identificador de cada capítulo es un 0
 	    
-	    if( pgBreak == 0 && notes!=9 && notes != 6 && code != "code"){
+	    if( pgBreak == 0 && notes!=9 && notes != 6 ){
 		doc.addPage({size: [792, 612]});
 	    }
 	    
@@ -178,6 +178,7 @@ Comité tutor: Iracema de Andrade y Fernando Monreal`);
 		doc.fill(grad);
 		// Dibujo el texto asociado a la imagen en cuestión. Aparece envima del recuadro dibujado inicialmente 
 		doc.fillColor('white').text("Figura "+(pgCo+1)+". "+data.imgs[pgCo].nota, 72, doc.page.height-(doc.page.height/5)-4)
+		doc.addPage({size: [792, 612]});
 		// cambia el contador de la imagen
 		pgCo++;
 	    }

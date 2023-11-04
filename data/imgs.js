@@ -148,6 +148,11 @@ module.exports = {
 	    "img": "img/menu.jpg",
 	    "url": "https://three.ocelotl.cc/",
 	    "nota": "Errores en la lectura e impresión de este documento"
+	},
+	{
+	    "img": "img/tesis.jpg",
+	    "url": "https://tres.ocelotl.cc/",
+	    "nota": "Prototipo visual de interacción con notas en espacio tridimensional"
 	}
 	/*
 	{
