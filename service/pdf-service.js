@@ -100,7 +100,7 @@ Facultad de Música
 Instituto de Ciencias Aplicadas y Tecnología
 Instituto de Investigaciones Antropológicas\n\n\n\n\n
 TRES ESTUDIOS ABIERTOS
-Escrituras performáticas audiovisuales e investigación con Javascript\n\n\n\n\n
+Escritura de código en Javascript para el performance audiovisual y la investigación artística\n\n\n\n\n
 Que para optar por el grado de
 Doctor en Música
 (Tecnología Musical)\n
