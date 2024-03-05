@@ -68,12 +68,14 @@ module.exports = {
 	    "url": "https://three.ocelotl.cc/",
 	    "nota": "Sitio web con la visualización y la grabación de las primeras pruebas de colaboración a distancia con Iracema de Andrade."
 	},
+	/*
 	{
 	    "img": "img/threeunam.jpg",
 	    "titulo": "THREE.studies 4",
 	    "url": "",
 	    "nota": "THREE.studies. Programa Música de Cámara Música UNAM. Para esta ocasión, la pieza contó con Ana Karen Rodríguez como co-creadora."
-	},	
+	    },
+	*/
 	{
 	    "img": "img/felicidades.jpg",
 	    "titulo": "Anti 1", 
