@@ -39,6 +39,14 @@ Para lanzar en producción
 
 `pm2 index`
 
+## Notas adicionales
+
+Fue necesario crear una instancia de [Trilium Notes](https://github.com/zadam/trilium) en un servidor personalizado. 
+
+Las instrucciones que se usaron para desplegar una instancia de Trilum están en el siguiente enlace: 
+
+[Docker-server-installation](https://github.com/zadam/trilium/wiki/Docker-server-installation)
+
 ## Referencias
 
 - De Assis, P. (2018). Logic of Experimentation. Leuven University Press. https://doi.org/10.2307/j.ctv6zdcpg
