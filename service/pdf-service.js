@@ -85,7 +85,7 @@ function buildPDF(dataCallback, endCallback) {
     // bufferPages permite regresar a las páginas del documento para agregar elementos. Por ejemplo el número de página.
     // Con font es posible personalizar la fuente. En este caso, la fuente general del documento es SourceCodePro
     // También se determinan el tamaño de la página y los márgenes
-    const doc = new PDFDocument({ bufferPages: true, font: 'fonts/SourceCodePro-Regular.ttf', size: [792, 612], margins: { top: 72+72/2, left: 72, right: 72, bottom: 72} });
+    const doc = new PDFDocument({ bufferPages: true, font: 'fonts/Exo2.ttf', size: [792, 612], margins: { top: 72+72/2, left: 72, right: 72, bottom: 72} });
 
     // la funcion buildPDF tiene dos estados, dataCallback que es el llamado de los datos solicitados, en este caso un archivo pdf
     doc.on('data', dataCallback);
@@ -136,7 +136,7 @@ Comité tutor: Iracema de Andrade y Fernando Monreal`);
 	    //console.log(matches)
 
 	    if(pgBreak == "8" || pgBreak == "9" || notes == "a"){
-		matches = matches.slice(4); 
+			matches = matches.slice(4); 
 	    }
 	    
 	    // Salto para el título inicial de cada capítulo. Aquí se implementan los filtros antes declarados. 
@@ -144,11 +144,12 @@ Comité tutor: Iracema de Andrade y Fernando Monreal`);
 	   
 	    if( pgBreak == 0  && notes!=9 && notes != 6 ){
 		// es necesario regresar al tamaño de hoja carta cuando se modifica el tamañoo por la inserción de una imagen
-		doc.addPage({size: [792, 612]});
+			doc.addPage({size: [792, 612]});
 	    }
 	    
 	    if(notes == 'a' && notes!=9  && notes != 6 ){		
 		// Agregar el bloque de texto. Si es una referencia entonces los espacios entre notas se reducen 
+		// Dentro de las características de text se puede poner una opción column que puede lucir bien para la versión final del documento. 
 		doc.fillColor('black').fontSize(10).text("\n"+matches, {width: 792-(72*2)})
 	    } else if(notes!=9 && notes != 6 ){
 		// Agrega una nota de texto normal 

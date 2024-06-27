@@ -47,6 +47,10 @@ Las instrucciones que se usaron para desplegar una instancia de Trilum están en
 
 [Docker-server-installation](https://github.com/zadam/trilium/wiki/Docker-server-installation)
 
+Para tener dos o más instancias con docker, es necesario forwardear de la siguiente manera y cambiar el nombre de la carpeta: 
+
+`docker run -d -p 8085:8080 -v ~/tesis:/home/node/tesis zadam/trilium:0.63.7`
+
 ## Referencias
 
 - De Assis, P. (2018). Logic of Experimentation. Leuven University Press. https://doi.org/10.2307/j.ctv6zdcpg
